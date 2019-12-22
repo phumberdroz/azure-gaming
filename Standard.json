@@ -14,6 +14,13 @@
                 "description": "Password for the Virtual Machine."
             }
         },
+        "deploymentName": {
+            "type": "string",
+            "metadata": {
+                "description": "Acts as a prefix for deployments."
+            },
+            "defaultValue": "CloudGaming"
+        },
         "autoShutdownStatus": {
             "type": "string",
             "allowedValues": [
@@ -66,14 +73,14 @@
         }
     },
     "variables": {
-        "nicName": "CloudGamingNic",
+        "nicName": "[parameters('deploymentName')]Nic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "vmName": "CloudGaming",
-        "virtualNetworkName": "CloudGamingVNET",
-        "publicIPAddressName": "CloudGamingsPublicIP",
+        "vmName": "[parameters('deploymentName')]",
+        "virtualNetworkName": "[parameters('deploymentName')]VNET",
+        "publicIPAddressName": "[parameters('deploymentName')]sPublicIP",
         "dnsNameForPublicIP": "[concat('cgp', uniqueString(resourceGroup().id, deployment().name))]",
         "scriptFolder": ".",
         "scriptFileName": "setup.ps1",
@@ -179,7 +186,7 @@
                     }
                 },
                 "hardwareProfile": {
-                    "vmSize": "Standard_NV6"
+                    "vmSize": "Standard_NV12"
                 },
                 "storageProfile": {
                     "imageReference": {
