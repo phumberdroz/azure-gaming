@@ -73,14 +73,14 @@
         }
     },
     "variables": {
-        "nicName": "[parameters('deploymentName')]Nic",
+        "nicName": "windowsNic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "vmName": "[parameters('deploymentName')]",
-        "virtualNetworkName": "[parameters('deploymentName')]VNET",
-        "publicIPAddressName": "[parameters('deploymentName')]sPublicIP",
+        "vmName": "windows",
+        "virtualNetworkName": "windowsVNET",
+        "publicIPAddressName": "windowssPublicIP",
         "dnsNameForPublicIP": "[concat('cgp', uniqueString(resourceGroup().id, deployment().name))]",
         "scriptFolder": ".",
         "scriptFileName": "setup.ps1",
